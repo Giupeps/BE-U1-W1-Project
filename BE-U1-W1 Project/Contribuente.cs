@@ -9,13 +9,13 @@ namespace BE_U1_W1_Project
 {
     internal class Contribuente
     {
-        private string Nome { get; set; }
-        private string Cognome { get; set; }
+        public string Nome { get; set; }
+        public string Cognome { get; set; }
         public DateTime DataNascita { get; set; }
-        private string CodiceFiscale { get; set; }
-        private string Sesso {get; set;}
-        private string ComuneResidenza { get; set; }
-        private double RedditoAnnuale { get; set; }
+        public string CodiceFiscale { get; set; }
+        public string Sesso {get; set;}
+        public string ComuneResidenza { get; set; }
+        public double RedditoAnnuale { get; set; }
 
         public Contribuente() { }
         public Contribuente(string nome, string cognome, DateTime dataNascita, string codiceFiscale, string sesso, string comuneResidenza, double redditoAnnuale)
@@ -60,17 +60,66 @@ namespace BE_U1_W1_Project
 
         public void Menu()
         {
+            Console.WriteLine("\n");
             Console.WriteLine("==================================");
             Console.WriteLine("CALCOLO DELL'IMPOSTA DA VERSARE");
+            Console.WriteLine("\n");
             Console.WriteLine("Digita il nome:");
             Nome = Console.ReadLine();
+            Console.WriteLine("\n");
             Console.WriteLine("Digita il cognome:");
             Cognome = Console.ReadLine();
-            Console.WriteLine("Data di nascita (giorno/mese/anno):");
+            Console.WriteLine("\n");
+            Console.WriteLine("Data di nascita (gg/mm/aaaa):");
             DataNascita = DateTime.Parse(Console.ReadLine());
-            
-
+            Console.WriteLine("\n");
+            Console.WriteLine("Digita il Codice Fiscale");
+            CodiceFiscale = Console.ReadLine();
+            Console.WriteLine("\n");
+            Console.WriteLine("Sesso: M/F");
+            string scelta = Console.ReadLine();
+            if (scelta == "M")
+            {
+                Sesso = "Maschio";
+            }
+            else if (scelta == "F")
+            {
+                Sesso = "Femmina";
+            }
+            else
+            {
+                if (scelta != "M" | scelta != "F") 
+                {
+                    Console.WriteLine("Scelta non esatta, digita M o F");
+                    Menu();
+                }
+            }
+            Console.WriteLine("\n");
+            Console.WriteLine("Digita il comune di residenza:");
+            ComuneResidenza = Console.ReadLine();
+            Console.WriteLine("\n");
+            Console.WriteLine("Digita il reddito annuale:");
+            RedditoAnnuale = double.Parse(Console.ReadLine());
+            CalcolaImposta();
         }
 
+        public void CalcolaImposta()
+        {
+            double imposta = CalcoloReddito(RedditoAnnuale);
+            Console.WriteLine("\n");
+            Console.WriteLine("================");
+            Console.WriteLine("Riepilogo");
+            Console.WriteLine("\n");
+            Console.WriteLine($"Contribuente: {Nome} {Cognome}");
+            Console.WriteLine($"Nato il:{DataNascita.ToString("dd/MM/yyyy")} ({Sesso})");
+            Console.WriteLine($"Residente in: {ComuneResidenza}");
+            Console.WriteLine($"Codice Fiscale:{CodiceFiscale}");
+            Console.WriteLine("\n");
+            Console.WriteLine($"Reddito Dichiarato: {RedditoAnnuale} Euro");
+            Console.WriteLine("\n");
+            Console.WriteLine($"IMPOSTA DA VERSARE: {imposta} Euro");
+            Console.WriteLine("\n");
+            Console.WriteLine("\n");
+        }
     }
 }
