@@ -60,6 +60,9 @@ namespace BE_U1_W1_Project
 
         public void Menu()
         {
+            try
+            {
+            
             Console.WriteLine("\n");
             Console.WriteLine("==================================");
             Console.WriteLine("CALCOLO DELL'IMPOSTA DA VERSARE");
@@ -101,6 +104,16 @@ namespace BE_U1_W1_Project
             Console.WriteLine("Digita il reddito annuale:");
             RedditoAnnuale = double.Parse(Console.ReadLine());
             CalcolaImposta();
+
+           
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Menu();
+                
+            }
         }
 
         public void CalcolaImposta()
